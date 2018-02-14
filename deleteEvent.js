@@ -1,7 +1,9 @@
 function deleteEvent(collection, id) {
 
     for (var key in collection) {
+
         return Object.keys(collection).forEach(function(key) {
+
             if (key == id) {
                 delete collection[key];
             }
