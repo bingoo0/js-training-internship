@@ -13,7 +13,6 @@ function updateEvent(collection, id) {
     createEvent(collection);
 }
 
-
 function createEvent(collection) {
 
     return Object.keys(collection).forEach(function(key) {
@@ -40,9 +39,14 @@ console.log(updateEvent({
         event: ' Grand Opening of new Club',
         access: true
     },
+    3: {
+        eventName: 'Sample Event33',
+        event: ' Grand Opening of new Club',
+        access: true
+    },
     2: {
         clientName: 'Ivan Ivanov',
         gender: 'male',
         age: 18
     }
-}, 1));
+}, 3));
