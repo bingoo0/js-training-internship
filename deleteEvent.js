@@ -5,7 +5,11 @@ function deleteEvent(collection, id) {
             if (key == id) {
                 delete collection[key];
             }
-            console.log(collection[key]);
+
+            if (key != "clientInfo") {
+                console.log(collection[key]);
+            }
+
         });
     }
 }
