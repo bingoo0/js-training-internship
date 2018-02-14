@@ -1,25 +1,30 @@
 function deleteEvent(collection, id) {
 
-    for (let key in collection) {
-        if (collection.hasOwnProperty(key) && key == id) {
-
-            delete collection[key];
-
-        }
+    for (var key in collection) {
+        return Object.keys(collection).forEach(function(key) {
+            if (key == id) {
+                delete collection[key];
+            }
+            console.log(collection[key]);
+        });
     }
-
-    return Object.keys(collection).forEach(function(key) {
-        console.log(collection[key]);
-    });
 }
 
 
-console.log(deleteEvent([{
-    eventName: 'Sample Event',
-    event: ' Grand Opening of new Club',
-    age: '18+'
-}, {
-    eventName: 'Sample Events',
-    event: ' Grand Opening of new Club',
-    age: '18+'
-}], 0));
+console.log(deleteEvent({
+    1: {
+        eventName: 'Sample Event',
+        event: ' Grand Opening of new Club',
+        access: true
+    },
+    2: {
+        eventName: 'Sample Event',
+        event: ' Grand Opening of new Club',
+        access: true
+    },
+    clientInfo: {
+        clientName: 'Ivan Ivanov',
+        gender: 'male',
+        age: 18
+    }
+}, 1));

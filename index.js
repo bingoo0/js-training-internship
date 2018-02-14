@@ -6,7 +6,14 @@ function createEvent(collection) {
 }
 
 createEvent({
-    eventName: 'Sample Event',
-    event: ' Grand Opening of new Club',
-    age: '18+'
+    1: {
+        eventName: 'Sample Event',
+        event: ' Grand Opening of new Club',
+        access: true
+    },
+    2: {
+        clientName: 'Ivan Ivanov',
+        gender: 'male',
+        age: 18
+    }
 });
