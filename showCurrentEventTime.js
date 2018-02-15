@@ -1,12 +1,19 @@
 function createEvent(collection) {
 
-    var getCurrentDate = Date();
+    var printCurrentDate = getCurrentDate();
 
     return Object.keys(collection).forEach(function(key) {
         console.log(collection[key]);
-        console.log(getCurrentDate);
+        console.log(printCurrentDate);
 
     });
+}
+
+function getCurrentDate() {
+
+    var getCurrentDate = Date();
+
+    return getCurrentDate;
 }
 
 createEvent({
