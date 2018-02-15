@@ -1,6 +1,4 @@
-function accessDenied(collection) {
-
-    let access = true;
+function accessDenied(collection, accsess) {
 
     if (access == true) {
         console.log("The operations couldn't been complete, please try again later.");
@@ -35,4 +33,4 @@ accessDenied([{
         gender: 'male',
         age: 21
     }
-]);
+], true);
