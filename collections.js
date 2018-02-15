@@ -2,24 +2,18 @@ var forEachFunc = function(collection, callback) {
 
     var result = [];
     for (let i = 0; i < collection.length; i++) {
-
-        result[i] = callback(collection[i]);
-
+        callback(collection[i]);
     }
-
-    return result;
 }
 
-function callbackFunc(collection) {
 
-    return collection;
-}
 
 console.log("--- For Each Function ---")
 
 
-var printForEachFunc = forEachFunc([1, 2, 3, 4], callbackFunc);
-console.log(printForEachFunc);
+var printForEachFunc = forEachFunc([1, 2, 3, 4], function(element) {
+    console.log(element);
+});
 
 
 
@@ -30,8 +24,8 @@ var filterFunc = function(collection, callback) {
     var result = [];
     for (let i = 0; i < collection.length; i++) {
 
-        if (collection[i] % 2 == 0) {
-            result[i] = callback(collection[i]);
+        if (callback(collection[i])) {
+            result.push(collection[i]);
         }
     }
 
@@ -39,12 +33,10 @@ var filterFunc = function(collection, callback) {
 
 }
 
-function filter(collection) {
 
-    return collection;
-}
-
-var printFilterFunc = filterFunc([2, 4, 5, 19, 12], filter);
+var printFilterFunc = filterFunc([2, 4, 5, 19, 12], function(element) {
+    return element % 2 == 0;
+});
 console.log(printFilterFunc);
 
 
@@ -62,12 +54,11 @@ var mapFunc = function(collection, callback) {
     return result;
 }
 
-function map(collection) {
 
-    return collection * 2;
-}
+var printMapFunc = mapFunc([1, 2, 3, 4], function(element) {
 
-var printMapFunc = mapFunc([1, 2, 3, 4], map);
+    return element * 2;
+});
 
 console.log(printMapFunc);
 
@@ -79,10 +70,10 @@ var fillFunc = function(emptyCollection, collection, n) {
 
     for (let i = 0; i < n; i++) {
 
-        result[i] = collection[i];
-        emptyCollection[i] = result[i];
+        emptyCollection[i] = collection[i];
 
-        if (result[i] == undefined) {
+
+        if (emptyCollection[i] == undefined) {
 
             emptyCollection[i] = collection[Math.floor(Math.random() * collection.length)];
         }
@@ -101,16 +92,9 @@ console.log("--- Reverse Function ---")
 var reverseFunc = function(collection) {
 
     var result = [];
-    for (let i = 0; i < collection.length; i++) {
+    for (let i = collection.length - 1; i >= 0; i--) {
 
-        var getFirstElement = collection[i];
-        var getLastElement = collection[collection.length - 1 - i];
-
-        getFirstElement = getLastElement;
-        getLastElement = getFirstElement;
-
-        result[i] = getFirstElement;
-        result[i] = getLastElement;
+        result[i] = collection[collection.length - 1 - i];
 
     }
 
