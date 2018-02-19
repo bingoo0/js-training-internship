@@ -1,19 +1,33 @@
 function templateEngine(placeholder, kvp) {
 
-    var pattern = /{{\w+}}/;
+    var pattern = /{{([a-zA-Z-_\s]+)}}/;
     var result = pattern.test(placeholder);
-    var match = pattern.exec(placeholder);
 
     if (result) {
 
-        for (var key in kvp) {
 
-            var getValue = kvp[key];
-            key = "{{" + key + "}}";
+        for (let i = 0; i < placeholder.length; i++) {
 
-            if (key == match[0]) {
+            var match = [];
 
-                placeholder = placeholder.replace(pattern, getValue)
+
+            for (var key in kvp) {
+
+                match = pattern.exec(placeholder);
+
+                if (match == null) {
+
+                    break;
+
+                }
+
+                var getValue = kvp[key];
+
+                if (key == match[1].trim()) {
+
+                    placeholder = placeholder.replace(pattern, getValue);
+
+                }
             }
         }
     }
@@ -21,13 +35,15 @@ function templateEngine(placeholder, kvp) {
     return placeholder;
 
 }
-
+var templateExamples = "This is test {{     somethingelse    }} {{       template}} {{     string    }}  {{     somethingelse    }}";
 var templateObj = {
 
-    template: "For This unit"
+    template: "intern training",
+    string: "task",
+    somethingelse: "replace"
+
 }
 
-var template = templateEngine("This is sample text {{template}}",
-    templateObj);
+var template = templateEngine(templateExamples, templateObj);
 
 console.log(template);
