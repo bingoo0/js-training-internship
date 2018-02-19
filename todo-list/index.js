@@ -29,9 +29,9 @@ var addToDo = function addInToDo() {
 
 var selectToDoTask = function selectTask() {
 
-    var list = document.querySelector('ul');
+    var list = document.querySelector('UL');
     list.addEventListener('click', function(ev) {
-        if (ev.target.tagName === 'li') {
+        if (ev.target.tagName === 'LI') {
             ev.target.classList.toggle('checked');
         }
     }, false);
