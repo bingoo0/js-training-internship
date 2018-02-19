@@ -1,6 +1,7 @@
 var addToDo = function addInToDo() {
 
     var li = document.createElement('li');
+
     var value = document.getElementById("todo").value;
     var text = document.createTextNode(value);
     li.appendChild(text);
@@ -28,30 +29,15 @@ var addToDo = function addInToDo() {
 
 var selectToDoTask = function selectTask() {
 
-    var tasks = document.querySelector("ul");
-    tasks.addEventListener('click', function(event) {
-        if (event.target.tagName === 'li') {
-            event.target.classList.toggle('checked');
+    var list = document.querySelector('ul');
+    list.addEventListener('click', function(ev) {
+        if (ev.target.tagName === 'LI') {
+            ev.target.classList.toggle('checked');
         }
     }, false);
 }
 
 var DeleteToDo = function deleteToDo() {
-    let close = document.getElementsByClassName("close");
-    for (let i = 0; i < close.length; i++) {
-        close[i].onclick = function() {
-            var div = this.parentElement;
-            div.style.display = "none";
-        }
-    }
 
-    var myNodelist = document.getElementsByTagName("li");
 
-    for (let i = 0; i < myNodelist.length; i++) {
-        var span = document.createElement("span");
-        var deleteToDo = document.createTextNode("\u00D7");
-        span.className = "close";
-        span.appendChild(deleteToDo);
-        myNodelist[i].appendChild(span);
-    }
 }
