@@ -1,3 +1,5 @@
+var takeLi = "";
+
 var addToDo = function addInToDo() {
 
     var li = document.createElement('li');
@@ -13,11 +15,18 @@ var addToDo = function addInToDo() {
     }
     document.getElementById("todo").value = "";
 
+    takeLi = li;
+    closeToDo();
+}
+
+
+var closeToDo = function close() {
+
     var span = document.createElement("span");
     var x = document.createTextNode("\u00D7");
     span.className = "close";
     span.appendChild(x);
-    li.appendChild(span);
+    takeLi.appendChild(span);
 
     for (let i = 0; i < close.length; i++) {
         close[i].onclick = function() {
@@ -25,7 +34,28 @@ var addToDo = function addInToDo() {
             div.style.display = "none";
         }
     }
+
+    var myNodelist = document.getElementsByTagName("LI");
+
+    for (let i = 0; i < myNodelist.length; i++) {
+        span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        myNodelist[i].appendChild(span);
+    }
+
+    // Click on a close button to hide the current list item
+    var deleteField = document.getElementsByClassName("close");
+
+    for (let i = 0; i < deleteField.length; i++) {
+        deleteField[i].onclick = function() {
+            var div = this.parentElement;
+            div.style.display = "none";
+        }
+    }
 }
+
 
 var selectToDoTask = function selectTask() {
 

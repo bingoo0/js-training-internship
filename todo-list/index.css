@@ -57,7 +57,8 @@ ul li {
     border-radius: 10px;
 }
 
-.close {
+.close,
+.edit {
     float: right;
 }
 
