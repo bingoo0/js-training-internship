@@ -18,7 +18,7 @@ var addToDo = function addInToDo() {
     takeLi = li;
 
     deleteToDo();
-
+    updateToDo();
 }
 
 var closeToDo = function close() {
@@ -29,12 +29,6 @@ var closeToDo = function close() {
     span.appendChild(txt);
     takeLi.appendChild(span);
 
-    for (i = 0; i < close.length; i++) {
-        close[i].onclick = function() {
-            var div = this.parentElement;
-            div.style.display = "none";
-        }
-    }
 }
 
 var deleteToDo = function delToDo() {
@@ -56,9 +50,22 @@ var deleteToDo = function delToDo() {
 var selectToDoTask = function selectTask() {
 
     var list = document.querySelector('UL');
+
     list.addEventListener('click', function(ev) {
         if (ev.target.tagName === 'LI') {
             ev.target.classList.toggle('checked');
         }
     }, false);
+}
+
+var updateToDo = function() {
+
+    var span = document.createElement("SPAN");
+    var txt = document.createTextNode("EDIT");
+    span.className = "edit";
+    span.appendChild(txt);
+    takeLi.appendChild(span);
+
+    var editField = document.getElementsByClassName("edit");
+
 }
