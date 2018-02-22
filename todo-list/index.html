@@ -6,24 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="index.css">
-    <script src="index.js"></script>
+
     <title>To Do List</title>
 </head>
 
 <body>
-    <header>
-        <div class="header">
-            <h2>to do list</h2>
-            <input type="text" name="todo" id="todo" placeholder="Add your todo..." />
-            <input type="button" value="Add" class="addToDo" onclick="addToDo()" />
-        </div>
-    </header>
     <main>
-        <ul id="ul" onclick="selectToDoTask()">
-            <li>dsadsadsad
-                <span class="close">×</span>
-            </li>
-        </ul>
+        <div class="container">
+            <label for="new-task">Add Item</label>
+            <input id="new-task" type="text" />
+            <button id="add-task" onclick="createNewTaskElement()">Add</button>
+            <h3>To Do</h3>
+            <ul class="incomplete-tasks" id="tasks-incomplete">
+            </ul>
+            <h3>Completed</h3>
+            <ul id="completed-tasks">
+            </ul>
+        </div>
+
+        <script type="text/javascript" src="index.js"></script>
     </main>
 </body>
 
