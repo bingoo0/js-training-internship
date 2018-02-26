@@ -52,6 +52,10 @@ button:hover {
     margin-left: 55px;
 }
 
+.confirm {
+    display: none;
+}
+
 h3,
 label[for='new-task'] {
     color: #333;
