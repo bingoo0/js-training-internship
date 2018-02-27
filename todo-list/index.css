@@ -37,9 +37,10 @@ button {
     color: #888;
     font-size: 15px;
     width: 60px;
-    margin: 10px 0 0;
+    line-height: 15px;
     font-family: Lato, sans-serif;
     cursor: pointer;
+    display: block;
 }
 
 button:hover {
@@ -47,8 +48,10 @@ button:hover {
 }
 
 .edit,
-.delete {
+.delete,
+.show-time {
     margin-left: 15px;
+    float: right;
 }
 
 .confirm {
@@ -60,7 +63,6 @@ label[for='new-task'] {
     color: #333;
     font-weight: 700;
     font-size: 15px;
-    border-bottom: 2px solid #333;
     padding: 30px 0 10px;
     margin: 0;
     text-transform: uppercase;

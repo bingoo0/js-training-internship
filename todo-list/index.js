@@ -1,3 +1,7 @@
+var index = 0;
+
+var listItem = document.createElement("li");
+
 var createNewTaskElement = function() {
 
     var taskInput = document.getElementById("new-task");
@@ -6,7 +10,7 @@ var createNewTaskElement = function() {
     var completedTasksHolder = document.getElementById("completed-tasks");
 
 
-    var listItem = document.createElement("li");
+    listItem = document.createElement("li");
 
     var checkBox = document.createElement("input"); //checkbx
     //label
@@ -23,9 +27,13 @@ var createNewTaskElement = function() {
 
     var checkboxButton = document.createElement("button");
 
+    var getTime = new Date();
+    var showTimeLabel = document.createElement("label");
+
     var value = document.getElementById("new-task").value;
 
     label.innerText = value;
+    showTimeLabel.innerText = getTime;
 
     listItem.className = "to-do";
     checkBox.type = "checkbox";
@@ -35,11 +43,18 @@ var createNewTaskElement = function() {
 
     editConfirm.innerText = "Confirm";
     editConfirm.className = "confirm";
+
     editButton.innerText = "Edit";
     editButton.className = "edit";
+
     deleteButton.innerText = "Delete";
     deleteButton.className = "delete";
+
     checkboxButton.className = "input-checkbox";
+
+    showTimeLabel.id = "time-label";
+    showTimeLabel.style.display = "none";
+
 
     var inputCheck = document.getElementById("input-checkbox");
 
@@ -47,26 +62,33 @@ var createNewTaskElement = function() {
         alert("You must write something!");
     } else {
 
-        listItem.appendChild(checkboxButton)
-        checkboxButton.appendChild(checkBox);
+        listItem.appendChild(checkBox)
         listItem.appendChild(label);
         listItem.appendChild(editConfirm);
         listItem.appendChild(editInput);
         listItem.appendChild(editButton);
         listItem.appendChild(deleteButton);
-
+        listItem.appendChild(showTimeLabel);
+        listItem.setAttribute("data-index", 1);
+        index++;
         document.getElementById("tasks-incomplete").appendChild(listItem);
 
     }
 
+    document.getElementById("new-task").value = "";
+
+
+
+    listItem.setAttribute("data-index", index);
 
     document.getElementById("new-task").value = "";
 
     checkField();
     deleteTask();
-    editField();
+    listItem.addEventListener('click', editField());
     countOfEvents();
     countOfAllEvents();
+    showTime();
 
 }
 
@@ -91,16 +113,16 @@ var deleteTask = function() {
 var checkField = function() {
 
     var checkBox = document.querySelector("input[type=checkbox]");
-    var inputCheck = document.getElementsByClassName("input-checkbox");
     var completedTasks = document.getElementById("completed-tasks");
     var incompleteTasks = document.getElementById("tasks-incomplete");
-    var listItem = document.getElementsByClassName("to-do");
 
+    var count = listItem.getAttribute("data-index");
 
-    for (let i = 0; i < inputCheck.length; i++) {
+    console.log(count);
 
-        inputCheck[i].onchange = function() {
+    for (let i = 0; i < count; i++) {
 
+        checkBox.addEventListener('click', function() {
             var completed = this.parentElement;
 
 
@@ -136,12 +158,8 @@ var checkField = function() {
                 labelActive.innerText = activeLists.length--;
 
             }
-
-        }
+        });
     }
-
-
-
 }
 
 var editField = function() {
@@ -204,4 +222,15 @@ var countOfEvents = function() {
     labelComplited.innerHTML = complitedLists.length;
 
 
+}
+
+var showTime = function() {
+
+    var showTimeButton = document.getElementsByTagName("button")[1];
+    var timeLabel = document.getElementById("time-label");
+
+    showTimeButton.onclick = function(event) {
+
+        timeLabel.style.display = "inline";
+    }
 }
