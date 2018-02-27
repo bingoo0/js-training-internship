@@ -49,7 +49,7 @@ button:hover {
 
 .edit,
 .delete {
-    margin-left: 55px;
+    margin-left: 15px;
 }
 
 .confirm {
@@ -145,4 +145,10 @@ ul li.editMode label {
 div>label,
 h3 {
     text-align: center;
+}
+
+.todo-count{
+    display: inline-block;
+    width: 400px;
+    margin-left: 560px;
 }

@@ -1,6 +1,5 @@
-var list = [];
 
-var createNewTaskElement = function() {
+var createNewTaskElement = function () {
 
     var taskInput = document.getElementById("new-task");
     var addButton = document.getElementsByTagName("button")[0];
@@ -23,6 +22,8 @@ var createNewTaskElement = function() {
     //button.delete
     var deleteButton = document.createElement("button"); //delete button
 
+    var checkboxButton = document.createElement("button");
+
     var value = document.getElementById("new-task").value;
 
     label.innerText = value;
@@ -39,12 +40,16 @@ var createNewTaskElement = function() {
     editButton.className = "edit";
     deleteButton.innerText = "Delete";
     deleteButton.className = "delete";
+    checkboxButton.className = "input-checkbox";
+
+    var inputCheck = document.getElementById("input-checkbox");
 
     if (value === '') {
         alert("You must write something!");
     } else {
 
-        listItem.appendChild(checkBox);
+        listItem.appendChild(checkboxButton)
+        checkboxButton.appendChild(checkBox);
         listItem.appendChild(label);
         listItem.appendChild(editConfirm);
         listItem.appendChild(editInput);
@@ -58,62 +63,85 @@ var createNewTaskElement = function() {
 
     document.getElementById("new-task").value = "";
 
-    list = listItem;
-
     checkField();
     deleteTask();
     editField();
-
+    countOfEvents();
+    countOfActiveEvents();
 }
 
 
-var deleteTask = function() {
+var deleteTask = function () {
     var deleteField = document.getElementsByClassName("delete");
 
     for (let i = 0; i < deleteField.length; i++) {
-        deleteField[i].onclick = function() {
-            var delField = this.parentElement;
-            delField.style.display = "none";
+        deleteField[i].onclick = function () {
+            var delField = this.parentElement.parentElement;
+
+            delField.removeChild(this.parentElement);
+
+            countOfEvents();
+            countOfActiveEvents();
         }
 
     }
 }
 
-var checkField = function() {
+var checkField = function () {
 
     var checkBox = document.querySelector("input[type=checkbox]");
+    var inputCheck = document.getElementsByClassName("input-checkbox");
     var completedTasks = document.getElementById("completed-tasks");
     var incompleteTasks = document.getElementById("tasks-incomplete");
-    var listItemLength = document.getElementsByClassName("to-do");
-    var deleteField = document.getElementsByClassName("delete");
+    var listItem = document.getElementsByClassName("to-do");
 
-    checkBox.onchange = function() {
 
-        var completed = this.parentElement;
+    for (let i = 0; i < inputCheck.length; i++) {
 
-        if (checkBox.checked == true) {
+        inputCheck[i].onchange = function () {
 
-            checkBox.classList.toggle('checked');
-            completedTasks.appendChild(completed);
+            var completed = this.parentElement;
+            console.log(completed);
 
-        } else {
-            checkBox.classList.toggle('uncheked');
-            incompleteTasks.appendChild(completed);
+            if (checkBox.checked == true) {
+
+                checkBox.classList.toggle('checked');
+                completedTasks.appendChild(completed);
+
+                countOfActiveEvents();
+            }
+
+            if (checkBox.checked != true) {
+
+                checkBox.classList.toggle('uncheked');
+                incompleteTasks.appendChild(completed);
+
+                var activeEvents = document.getElementById("tasks-incomplete");
+
+                var activeLists = activeEvents.children;
+
+                var label = document.getElementById("active-events")
+
+                label.innerText = activeLists.length++;
+
+            }
+
         }
-
     }
+
+
 
 }
 
-var editField = function() {
+var editField = function () {
 
     var editInput = document.getElementById('edit');
     var edit = document.getElementsByClassName("edit");
     var editConfirm = document.getElementsByClassName("confirm");
 
-
     for (let i = 0; i < edit.length; i++) {
-        edit[i].onclick = function() {
+        edit[i].onclick = function () {
+
 
             var label = this.parentElement.children[1];
             var inputField = this.parentElement.children[3];
@@ -122,7 +150,7 @@ var editField = function() {
             editConfirm = edit;
 
             for (let i = 0; i < editConfirm.length; i++) {
-                editConfirm[i].onclick = function() {
+                editConfirm[i].onclick = function () {
 
 
                     if (editConfirm[i]) {
@@ -136,3 +164,28 @@ var editField = function() {
         }
     }
 }
+
+var countOfEvents = function () {
+
+    var countOfEvents = document.getElementsByClassName("to-do");
+
+    var label = document.getElementById("all-events");
+
+
+    label.innerText = countOfEvents.length--;
+
+
+}
+
+var countOfActiveEvents = function () {
+
+    var activeEvents = document.getElementById("tasks-incomplete");
+
+    var activeLists = activeEvents.children;
+
+    var label = document.getElementById("active-events")
+
+    label.innerText = activeLists.length--;
+
+}
+

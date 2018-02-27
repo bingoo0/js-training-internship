@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="index.css">
-
+    <script type="text/javascript" src="index.js"></script>
     <title>To Do List</title>
 </head>
 
@@ -17,15 +17,26 @@
             <input id="new-task" type="text" />
             <button id="add-task" onclick="createNewTaskElement()">Add</button>
             <h3>To Do</h3>
-            <ul class="incomplete-tasks" id="tasks-incomplete">
+            <ul data-index="3" class="incomplete-tasks" id="tasks-incomplete">
             </ul>
             <h3>Completed</h3>
             <ul id="completed-tasks">
             </ul>
         </div>
-
-        <script type="text/javascript" src="index.js"></script>
     </main>
+    <footer>
+        <span class="todo-count">
+            <ul class="count">
+                <li id="all">All
+                    <label for="count" id="all-events">0</label>
+                </li>
+                <li id="active">Active
+                        <label for="count" id="active-events">0</label>
+                </li>
+                <li>Complited</li>
+            </ul>
+        </span>
+    </footer>
 </body>
 
 </html>
