@@ -1,5 +1,4 @@
-
-var createNewTaskElement = function () {
+var createNewTaskElement = function() {
 
     var taskInput = document.getElementById("new-task");
     var addButton = document.getElementsByTagName("button")[0];
@@ -67,27 +66,29 @@ var createNewTaskElement = function () {
     deleteTask();
     editField();
     countOfEvents();
-    countOfActiveEvents();
+    countOfAllEvents();
+
 }
 
 
-var deleteTask = function () {
+var deleteTask = function() {
     var deleteField = document.getElementsByClassName("delete");
 
     for (let i = 0; i < deleteField.length; i++) {
-        deleteField[i].onclick = function () {
+        deleteField[i].onclick = function() {
             var delField = this.parentElement.parentElement;
 
             delField.removeChild(this.parentElement);
 
+            countOfAllEvents();
             countOfEvents();
-            countOfActiveEvents();
+
         }
 
     }
 }
 
-var checkField = function () {
+var checkField = function() {
 
     var checkBox = document.querySelector("input[type=checkbox]");
     var inputCheck = document.getElementsByClassName("input-checkbox");
@@ -98,17 +99,25 @@ var checkField = function () {
 
     for (let i = 0; i < inputCheck.length; i++) {
 
-        inputCheck[i].onchange = function () {
+        inputCheck[i].onchange = function() {
 
             var completed = this.parentElement;
-            console.log(completed);
+
 
             if (checkBox.checked == true) {
 
                 checkBox.classList.toggle('checked');
                 completedTasks.appendChild(completed);
 
-                countOfActiveEvents();
+                countOfEvents();
+
+                var complitedEvents = document.getElementById("completed-tasks");
+                var complitedLists = complitedEvents.children;
+                var labelComplited = document.getElementById("complited-events");
+
+                labelComplited.innerHTML = complitedLists.length--;
+
+
             }
 
             if (checkBox.checked != true) {
@@ -116,13 +125,15 @@ var checkField = function () {
                 checkBox.classList.toggle('uncheked');
                 incompleteTasks.appendChild(completed);
 
+                countOfEvents();
+
                 var activeEvents = document.getElementById("tasks-incomplete");
 
                 var activeLists = activeEvents.children;
 
-                var label = document.getElementById("active-events")
+                var labelActive = document.getElementById("active-events")
 
-                label.innerText = activeLists.length++;
+                labelActive.innerText = activeLists.length--;
 
             }
 
@@ -133,14 +144,14 @@ var checkField = function () {
 
 }
 
-var editField = function () {
+var editField = function() {
 
     var editInput = document.getElementById('edit');
     var edit = document.getElementsByClassName("edit");
     var editConfirm = document.getElementsByClassName("confirm");
 
     for (let i = 0; i < edit.length; i++) {
-        edit[i].onclick = function () {
+        edit[i].onclick = function() {
 
 
             var label = this.parentElement.children[1];
@@ -150,7 +161,7 @@ var editField = function () {
             editConfirm = edit;
 
             for (let i = 0; i < editConfirm.length; i++) {
-                editConfirm[i].onclick = function () {
+                editConfirm[i].onclick = function() {
 
 
                     if (editConfirm[i]) {
@@ -165,7 +176,7 @@ var editField = function () {
     }
 }
 
-var countOfEvents = function () {
+var countOfAllEvents = function() {
 
     var countOfEvents = document.getElementsByClassName("to-do");
 
@@ -177,15 +188,20 @@ var countOfEvents = function () {
 
 }
 
-var countOfActiveEvents = function () {
+var countOfEvents = function() {
 
     var activeEvents = document.getElementById("tasks-incomplete");
+    var complitedEvents = document.getElementById("completed-tasks");
 
     var activeLists = activeEvents.children;
+    var complitedLists = complitedEvents.children;
 
-    var label = document.getElementById("active-events")
 
-    label.innerText = activeLists.length--;
+    var labelActive = document.getElementById("active-events")
+    var labelComplited = document.getElementById("complited-events");
+
+    labelActive.innerText = activeLists.length;
+    labelComplited.innerHTML = complitedLists.length;
+
 
 }
-

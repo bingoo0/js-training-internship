@@ -17,10 +17,10 @@
             <input id="new-task" type="text" />
             <button id="add-task" onclick="createNewTaskElement()">Add</button>
             <h3>To Do</h3>
-            <ul data-index="3" class="incomplete-tasks" id="tasks-incomplete">
+            <ul class="incomplete-tasks" id="tasks-incomplete">
             </ul>
             <h3>Completed</h3>
-            <ul id="completed-tasks">
+            <ul id="completed-tasks" class="completed-tasks">
             </ul>
         </div>
     </main>
@@ -33,7 +33,9 @@
                 <li id="active">Active
                         <label for="count" id="active-events">0</label>
                 </li>
-                <li>Complited</li>
+                <li>Complited
+                    <label for="count" id="complited-events">0</label>
+                </li>
             </ul>
         </span>
     </footer>
