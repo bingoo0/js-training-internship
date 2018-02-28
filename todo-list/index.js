@@ -1,6 +1,11 @@
-var index = 0;
+var index = -1;
 
 var listItem = document.createElement("li");
+var checkBox = document.createElement("input");
+var editButton = document.createElement("button"); //edit button
+var editInput = document.createElement("input"); //text
+//button.edit
+var editConfirm = document.createElement("button"); // edin confirm
 
 var createNewTaskElement = function() {
 
@@ -12,20 +17,18 @@ var createNewTaskElement = function() {
 
     listItem = document.createElement("li");
 
-    var checkBox = document.createElement("input"); //checkbx
+    checkBox = document.createElement("input"); //checkbx
     //label
     var label = document.createElement("label"); //label
     //input (text)
-    var editInput = document.createElement("input"); //text
+    editInput = document.createElement("input"); //text
     //button.edit
-    var editConfirm = document.createElement("button"); // edin confirm
+    editConfirm = document.createElement("button"); // edin confirm
 
-    var editButton = document.createElement("button"); //edit button
+    editButton = document.createElement("button"); //edit button
 
     //button.delete
     var deleteButton = document.createElement("button"); //delete button
-
-    var checkboxButton = document.createElement("button");
 
     var getTime = new Date();
     var showTimeLabel = document.createElement("label");
@@ -49,8 +52,6 @@ var createNewTaskElement = function() {
 
     deleteButton.innerText = "Delete";
     deleteButton.className = "delete";
-
-    checkboxButton.className = "input-checkbox";
 
     showTimeLabel.id = "time-label";
     showTimeLabel.style.display = "none";
@@ -77,15 +78,17 @@ var createNewTaskElement = function() {
 
     document.getElementById("new-task").value = "";
 
-
-
     listItem.setAttribute("data-index", index);
+    checkBox.setAttribute("checkbox-index", index);
+    editButton.setAttribute("edit-index", index);
+    editConfirm.setAttribute("editConfirm-index", index);
+    editInput.setAttribute("editField-index", index);
 
     document.getElementById("new-task").value = "";
 
     checkField();
     deleteTask();
-    listItem.addEventListener('click', editField());
+    editField();
     countOfEvents();
     countOfAllEvents();
     showTime();
@@ -112,86 +115,84 @@ var deleteTask = function() {
 
 var checkField = function() {
 
-    var checkBox = document.querySelector("input[type=checkbox]");
     var completedTasks = document.getElementById("completed-tasks");
     var incompleteTasks = document.getElementById("tasks-incomplete");
 
-    var count = listItem.getAttribute("data-index");
-
+    count = checkBox.getAttribute("checkbox-index");
     console.log(count);
 
-    for (let i = 0; i < count; i++) {
+    checkBox.addEventListener('click', function() {
+        var completed = this.parentElement;
 
-        checkBox.addEventListener('click', function() {
-            var completed = this.parentElement;
-
-
-            if (checkBox.checked == true) {
-
-                checkBox.classList.toggle('checked');
-                completedTasks.appendChild(completed);
-
-                countOfEvents();
-
-                var complitedEvents = document.getElementById("completed-tasks");
-                var complitedLists = complitedEvents.children;
-                var labelComplited = document.getElementById("complited-events");
-
-                labelComplited.innerHTML = complitedLists.length--;
+        console.log(completed);
 
 
-            }
+        if (checkBox.checked == true) {
 
-            if (checkBox.checked != true) {
+            checkBox.classList.toggle('checked');
+            completedTasks.appendChild(completed);
 
-                checkBox.classList.toggle('uncheked');
-                incompleteTasks.appendChild(completed);
+            countOfEvents();
 
-                countOfEvents();
+            var complitedEvents = document.getElementById("completed-tasks");
+            var complitedLists = complitedEvents.children;
+            var labelComplited = document.getElementById("complited-events");
 
-                var activeEvents = document.getElementById("tasks-incomplete");
+            labelComplited.innerHTML = complitedLists.length--;
 
-                var activeLists = activeEvents.children;
 
-                var labelActive = document.getElementById("active-events")
+        }
 
-                labelActive.innerText = activeLists.length--;
+        if (checkBox.checked != true) {
 
-            }
-        });
-    }
+            checkBox.classList.toggle('uncheked');
+            incompleteTasks.appendChild(completed);
+
+            countOfEvents();
+
+            var activeEvents = document.getElementById("tasks-incomplete");
+
+            var activeLists = activeEvents.children;
+
+            var labelActive = document.getElementById("active-events")
+
+            labelActive.innerText = activeLists.length--;
+
+        }
+    });
+
 }
 
 var editField = function() {
 
-    var editInput = document.getElementById('edit');
-    var edit = document.getElementsByClassName("edit");
-    var editConfirm = document.getElementsByClassName("confirm");
 
-    for (let i = 0; i < edit.length; i++) {
-        edit[i].onclick = function() {
+    editButton.addEventListener('click', function() {
 
+        var label = this.parentElement.children[1];
+        var inputField = this.parentElement.children[3];
+        console.log(inputField);
+        inputField.style.display = "inline";
+        editConfirm.style.display = "inline";
+        editButton.style.display = "none";
 
-            var label = this.parentElement.children[1];
-            var inputField = this.parentElement.children[3];
-
-            inputField.style.display = "inline";
-            editConfirm = edit;
-
-            for (let i = 0; i < editConfirm.length; i++) {
-                editConfirm[i].onclick = function() {
+    }, false);
 
 
-                    if (editConfirm[i]) {
+    editConfirm.addEventListener('click', function() {
 
-                        label.innerHTML = inputField.value;
-                        inputField.style.display = "none";
-                    }
-                }
 
-            }
-        }
-    }
+        var label = this.parentElement.children[1];
+        var inputField = this.parentElement.children[3];
+
+        console.log(inputField);
+
+        label.innerHTML = inputField.value;
+        inputField.style.display = "none";
+        editButton.style.display = "inline";
+
+    }, false);
+
+
 }
 
 var countOfAllEvents = function() {

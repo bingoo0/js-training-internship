@@ -153,3 +153,8 @@ h3 {
     width: 400px;
     margin-left: 460px;
 }
+
+.confirm {
+    display: inline-block;
+    float: right;
+}
